@@ -8,10 +8,6 @@ on:
     paths:
       - "01-Basics/**"
 
-defaults:
-  run:
-    working-directory: 01-Basics
-
 jobs:
   code_quality:
     name: Code Quality
@@ -27,11 +23,21 @@ jobs:
         java-version: '21'
         distribution: 'corretto'
 
-    - name: Run Checkstyle
+    - name: Install ktlint
       working-directory: 01-Basics
-      run: ./gradlew ktlintCheck
+      run: |
+        curl -sSLO https://github.com/pinterest/ktlint/releases/download/1.5.0/ktlint && chmod a+x ktlint 
+        ./ktlint --version
 
-    - name: Running Horusec Security
+    - name: Running ktlint
+      working-directory: 01-Basics
+      run: ./ktlint 'src/**/*.kt' --reporter=plain?group_by_file
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-docker-action@v4
+
+    - name: Install Horusec Security
+      working-directory: 01-Basics
       run: |
         curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s v2.8.0
-        horusec start -p="./" -e="true"  
+        /usr/local/bin/horusec start -p "./" -e "true"
