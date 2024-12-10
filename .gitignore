@@ -7,6 +7,9 @@
 # Exclude all build directories
 build/
 
+# Exclude gradle
+.gradle/
+
 # Compiled class file
 *.class
 
