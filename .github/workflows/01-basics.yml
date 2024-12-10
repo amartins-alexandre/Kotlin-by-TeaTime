@@ -23,9 +23,15 @@ jobs:
         java-version: '21'
         distribution: 'corretto'
 
-    - name: Run Checkstyle
+    - name: Install ktlint
       working-directory: 01-Basics
-      run: ./gradlew ktlintCheck
+      run: |
+        curl -sSLO https://github.com/pinterest/ktlint/releases/download/1.5.0/ktlint && chmod a+x ktlint 
+        ./ktlint --version
+
+    - name: Running ktlint
+      working-directory: 01-Basics
+      run: ./ktlint 'src/**/*.kt' --reporter=plain?group_by_file --color=red
 
     - name: Running Horusec Security
       working-directory: 01-Basics
