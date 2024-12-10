@@ -31,7 +31,7 @@ jobs:
 
     - name: Running ktlint
       working-directory: 01-Basics
-      run: ./ktlint 'src/**/*.kt' --reporter=plain?group_by_file --color=red
+      run: ./ktlint 'src/**/*.kt' --reporter=plain?group_by_file
 
     - name: Running Horusec Security
       working-directory: 01-Basics
