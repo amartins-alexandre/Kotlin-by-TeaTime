@@ -8,25 +8,30 @@ on:
     paths:
       - "01-Basics/**"
 
+defaults:
+  run:
+    working-directory: 01-Basics
+
 jobs:
-    code_quality:
-        name: Code Quality
-        runs-on: ubuntu-24.04
+  code_quality:
+    name: Code Quality
+    runs-on: ubuntu-24.04
 
-        steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-        - name: Setup Java 21
-          uses: actions/setup-java@v4
-          with:
-            java-version: '21'
-            distribution: 'corretto'
+    - name: Setup Java 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'corretto'
 
-        - name: Run Checkstyle
-          run: ./gradlew ktlintCheck
+    - name: Run Checkstyle
+      working-directory: 01-Basics
+      run: ./gradlew ktlintCheck
 
-        - name: Running Horusec Security
-          run: |
-            curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s v2.8.0
-            horusec start -p="./" -e="true"  
+    - name: Running Horusec Security
+      run: |
+        curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s v2.8.0
+        horusec start -p="./" -e="true"  
