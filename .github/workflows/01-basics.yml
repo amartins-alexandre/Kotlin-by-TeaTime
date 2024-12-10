@@ -8,10 +8,6 @@ on:
     paths:
       - "01-Basics/**"
 
-defaults:
-  run:
-    working-directory: 01-Basics
-
 jobs:
   code_quality:
     name: Code Quality
@@ -32,6 +28,7 @@ jobs:
       run: ./gradlew ktlintCheck
 
     - name: Running Horusec Security
+      working-directory: 01-Basics
       run: |
         curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s v2.8.0
         horusec start -p="./" -e="true"  
