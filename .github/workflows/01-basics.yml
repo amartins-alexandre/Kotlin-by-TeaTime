@@ -40,4 +40,4 @@ jobs:
       working-directory: 01-Basics
       run: |
         curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s v2.8.0
-        ./horusec start -e="true"
+        /usr/local/bin/horusec start -e="true"
