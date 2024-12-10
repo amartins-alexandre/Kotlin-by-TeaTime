@@ -33,8 +33,11 @@ jobs:
       working-directory: 01-Basics
       run: ./ktlint 'src/**/*.kt' --reporter=plain?group_by_file
 
-    - name: Running Horusec Security
+    - name: Set up Docker Buildx
+      uses: docker/setup-docker-action@v4
+
+    - name: Install Horusec Security
       working-directory: 01-Basics
       run: |
         curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s v2.8.0
-        horusec start -p="./" -e="true"  
+        ./horusec start -e="true"
