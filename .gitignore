@@ -1,6 +1,9 @@
 # Jetbrains IDE
 .idea/
 
+# Gradle
+.gradle/
+
 # Exclude all build directories
 build/
 

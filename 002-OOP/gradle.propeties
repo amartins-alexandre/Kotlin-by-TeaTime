@@ -1,0 +1,5 @@
+# Apply the Kotlin code style
+# https://kotlinlang.org/docs/coding-conventions.html
+# ----------------------
+kotlin.code.style=official
+org.gradle.caching=false
