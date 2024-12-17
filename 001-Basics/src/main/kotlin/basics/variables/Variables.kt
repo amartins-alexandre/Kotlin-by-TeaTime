@@ -1,3 +1,5 @@
+package basics.variables
+
 fun main() {
     // Set the value of a variable without specifying the type
     val name = "John Doe" // var is immutable

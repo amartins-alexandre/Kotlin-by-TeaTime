@@ -1,3 +1,5 @@
+package basics.conditionals
+
 fun main() {
     var max: Int
     val a = 10
